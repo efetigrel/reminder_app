@@ -67,25 +67,45 @@ class AddReminder extends StatelessWidget {
               ElevatedButton(
                 onPressed: () async {
                   if (titleController.text.isEmpty) {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: const Center(child: Text('Title is required')),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: const Center(child: Text('OK')),
+                            ),
+                          ],
+                        );
+                      },
+                    );
                   } else {
                     SelectedDateTime selectedDateTime =
                         Provider.of<SelectedDateTime>(context, listen: false);
                     DateTime date = selectedDateTime.selectedDate;
                     TimeOfDay time = selectedDateTime.selectedTime;
+                    bool check = false;
+
+                    String timeString =
+                        '${time.hour}:${time.minute.toString().padLeft(2, '0')}';
 
                     await FirebaseFirestore.instance
                         .collection('reminders')
                         .add(
                       {
                         'date': date,
-                        'check': false,
-                        'time':
-                            '${time.hour}:${time.minute.toString().padLeft(2, '0')}',
+                        'check': check,
+                        'time': timeString,
                         'title': titleController.text,
                         'content': contentController.text,
                       },
                     );
 
+                    // Close the dialog
                     Navigator.of(context).pop();
                   }
                 },
