@@ -68,21 +68,21 @@ class AddReminder extends StatelessWidget {
                 onPressed: () async {
                   if (titleController.text.isEmpty) {
                     showDialog(
-                      context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          title: const Center(child: Text('Title is required')),
-                          actions: [
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              child: const Center(child: Text('OK')),
-                            ),
-                          ],
-                        );
-                      },
-                    );
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title:
+                                const Center(child: Text('Title is required')),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Center(child: Text('OK')),
+                              ),
+                            ],
+                          );
+                        });
                   } else {
                     SelectedDateTime selectedDateTime =
                         Provider.of<SelectedDateTime>(context, listen: false);
