@@ -17,7 +17,10 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -25,7 +28,10 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -43,15 +49,6 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyA3rRBPnzn6Fjbjka5JxvX23m5dAb0c12I',
-    appId: '1:116787073632:web:077f5e4648e2a4c647a905',
-    messagingSenderId: '116787073632',
-    projectId: 'reminder-app-87da4',
-    authDomain: 'reminder-app-87da4.firebaseapp.com',
-    storageBucket: 'reminder-app-87da4.appspot.com',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCWkJbB3qijZ5Mf7U94JoLTyZGQwZweEBE',
     appId: '1:116787073632:android:f1efa661556e33e647a905',
@@ -67,14 +64,5 @@ class DefaultFirebaseOptions {
     projectId: 'reminder-app-87da4',
     storageBucket: 'reminder-app-87da4.appspot.com',
     iosBundleId: 'com.example.reminderApp',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyB4gAyOBSjVsDxRirWoihekQ-lSCoJdExs',
-    appId: '1:116787073632:ios:c013cbb10e2c26f847a905',
-    messagingSenderId: '116787073632',
-    projectId: 'reminder-app-87da4',
-    storageBucket: 'reminder-app-87da4.appspot.com',
-    iosBundleId: 'com.example.reminderApp.RunnerTests',
   );
 }
